@@ -73,8 +73,12 @@ public class MainActivity extends AppCompatActivity {
     String PLMG = "", PMG = "", PRMG = "";
     int c = 0;
     String name = "";
+
     String version = "";
     String OTPCODE = "";
+
+    String DealerName = "";
+    int Did = 0;
     int printCount = 0;
     String gname = "";
     String gversion = "";
@@ -177,11 +181,17 @@ public class MainActivity extends AppCompatActivity {
         if (barcodeSparseArray.size() > 0) {
             Barcode result = barcodeSparseArray.valueAt(0);
             String serviceOTP = scanTxt(result.rawValue);
+            Log.w("ehserviceotp",serviceOTP);
             if (serviceOTP.contains("#") || serviceOTP.contains("@") || serviceOTP.contains("%") || serviceOTP.contains("&")) {
                 String[] otp = serviceOTP.split(";");
+
+                Log.w("ooop",""+otp[0]);
                 name = otp[1];
+                Log.w("ccdanem",name);
                 version = otp[2];
                 OTPCODE = otp[0];
+
+
               //  showDialouge();
 
             }
@@ -496,6 +506,8 @@ public class MainActivity extends AppCompatActivity {
     void showDialogForPrintCount(String rawtxt) {
         String [] SplitRawCodeValues = rawtxt.split(";");
 
+
+
         printcountdialog = new Dialog(MainActivity.this);
         printcountdialog.setContentView(R.layout.print_count_otp_dialog_box);
         printcountdialog.setTitle("Print Count OTP");
@@ -513,7 +525,22 @@ public class MainActivity extends AppCompatActivity {
 
         RawDialogCode.setText(SplitRawCodeValues[0]);
         textViewName.setText(SplitRawCodeValues[1]);
-        RawDialogVersion.setText(SplitRawCodeValues[1]);
+        RawDialogVersion.setText(SplitRawCodeValues[2]);
+        Log.w("length", ""+SplitRawCodeValues.length);
+        if(SplitRawCodeValues.length>3)
+        {
+            DealerName = SplitRawCodeValues[3];
+            Log.w("ddm",DealerName);
+        }
+
+        if(SplitRawCodeValues.length>4)
+        {
+            Did = Integer.parseInt(SplitRawCodeValues[4]);
+            Log.w("ddmid",""+Did);
+
+        }
+
+
 
 
         cardViewButton.setOnClickListener(view -> {
@@ -1390,11 +1417,11 @@ return  ServiceOtpis;
                 {
                     map.put("Client", name);
 
-
                 }
 
                 map.put("Version", version);
                 map.put("Doneby", userName);
+
 
                 map.put("Printcnt", String.valueOf(printCount));
                 map.put("User_ID", String.valueOf(id));
@@ -1459,12 +1486,19 @@ return  ServiceOtpis;
 
                 }
 
-                map.put("Version", version);
+                map.put("Version", RawDialogVersion.getText().toString());
                 map.put("Doneby", userName);
+                map.put("DealerName",DealerName);
+                Log.w("dealernn",DealerName);
+                map.put("Did", ""+Did);
+                Log.w("dealernnid",""+Did);
 
-                map.put("Printcnt", "0");
+              //  map.put("Printcnt", "0");
+                map.put("Printcnt", ""+TotalCount);
+                Log.w("cccft",""+TotalCount);
                 map.put("User_ID", String.valueOf(id));
                 map.put("Count", String.valueOf(count));
+                Log.w("ccft",String.valueOf(count));
                 Log.w("count di val", String.valueOf(count));
                 map.put("A5Value",A5PrintCountEditTxt.getText().toString());
                 Log.w("A5dival", A5PrintCountEditTxt.getText().toString());
@@ -1500,6 +1534,7 @@ return  ServiceOtpis;
     public void GeneratePrint(View view) {
 
 
+
         ShowDialog();
 
 
@@ -1520,71 +1555,68 @@ return  ServiceOtpis;
         gtextViewName = pdialog.findViewById(R.id.gtextName);
         gtextViewVersion = pdialog.findViewById(R.id.gtextVersion);
 
-        gcardViewButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String a = geditText.getText().toString();
-                String b = PrintID.getText().toString();
+        gcardViewButton.setOnClickListener(v -> {
+            String a = geditText.getText().toString();
+            String b = PrintID.getText().toString();
 
-                if(gtextViewName.getText().toString().isEmpty())
-                {
-                    gtextViewName.setError("Enter the name");
-                    gtextViewName.requestFocus();
-                    return;
-                }
-                if(b.length()<12)
-                {
-                    PrintID.setError("Incorrect value");
-                    PrintID.requestFocus();
-                    return;
-
-                }
-                if (b.isEmpty()) {
-                    PrintID.setError("Print Id is require");
-                    PrintID.requestFocus();
-                    return;
-                }
-                if (a.isEmpty()) {
-                    geditText.setError("Enter the Value of Print Count");
-                    geditText.requestFocus();
-                    return;
-                }
-
-                if (a.startsWith(String.valueOf(0))) {
-                    geditText.setError("Enter Correct Value");
-                    geditText.requestFocus();
-                    return;
-
-                }
-                if (ConnectionCheck.isConnected(connectivityManager, networkInfo, MainActivity.this)) {
-                    Log.w("1532 wali if","Working");
-                   // if (isgVarified()) {
-                        name = gtextViewName.getText().toString();
-                        OTPCODE = PrintID.getText().toString();
-                        version = gtextViewVersion.getText().toString();
-                        printCount = Integer.parseInt(geditText.getText().toString());
-                        TotalCount = Integer.parseInt(A3PrintCountEditTxt.getText().toString()) + Integer.parseInt(A4PrintCountEditTxt.getText().toString()) + Integer.parseInt(A5PrintCountEditTxt.getText().toString());
-                        Log.w("Totalcount",""+TotalCount);
-                        if (count > TotalCount || count == TotalCount) {
-                            count = count - TotalCount;
-                          //  uploadDetails();
-                            uploadNewDetailsLogic();
-                        }
-
-                        else {
-                            Toast.makeText(MainActivity.this, "1561 Unable to Generate Print Count OTP", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                    else {
-                        Toast.makeText(MainActivity.this, "Internet Connection Required", Toast.LENGTH_LONG).show();
-                    }
-
-
-
-
-
+            if(gtextViewName.getText().toString().isEmpty())
+            {
+                gtextViewName.setError("Enter the name");
+                gtextViewName.requestFocus();
+                return;
+            }
+            if(b.length()<12)
+            {
+                PrintID.setError("Incorrect value");
+                PrintID.requestFocus();
+                return;
 
             }
+            if (b.isEmpty()) {
+                PrintID.setError("Print Id is require");
+                PrintID.requestFocus();
+                return;
+            }
+            if (a.isEmpty()) {
+                geditText.setError("Enter the Value of Print Count");
+                geditText.requestFocus();
+                return;
+            }
+
+            if (a.startsWith(String.valueOf(0))) {
+                geditText.setError("Enter Correct Value");
+                geditText.requestFocus();
+                return;
+
+            }
+            if (ConnectionCheck.isConnected(connectivityManager, networkInfo, MainActivity.this)) {
+                Log.w("1532 wali if","Working");
+               // if (isgVarified()) {
+                    name = gtextViewName.getText().toString();
+                    OTPCODE = PrintID.getText().toString();
+                    version = gtextViewVersion.getText().toString();
+                    printCount = Integer.parseInt(geditText.getText().toString());
+                    TotalCount = Integer.parseInt(A3PrintCountEditTxt.getText().toString()) + Integer.parseInt(A4PrintCountEditTxt.getText().toString()) + Integer.parseInt(A5PrintCountEditTxt.getText().toString());
+                    Log.w("Totalcount",""+TotalCount);
+                    if (count > TotalCount || count == TotalCount) {
+                        count = count - TotalCount;
+                      //  uploadDetails();
+                        uploadNewDetailsLogic();
+                    }
+
+                    else {
+                        Toast.makeText(MainActivity.this, "1561 Unable to Generate Print Count OTP", Toast.LENGTH_LONG).show();
+                    }
+                }
+                else {
+                    Toast.makeText(MainActivity.this, "Internet Connection Required", Toast.LENGTH_LONG).show();
+                }
+
+
+
+
+
+
         });
         gcardViewButton1.setOnClickListener(new View.OnClickListener() {
             @Override

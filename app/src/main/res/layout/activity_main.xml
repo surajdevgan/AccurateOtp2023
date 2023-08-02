@@ -160,7 +160,7 @@
 
         <Button
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:onClick="GeneratePrint"
             android:layout_alignParentBottom="true"
             android:padding="5dp"
@@ -168,7 +168,6 @@
             android:background="@drawable/pntbtn"
             android:backgroundTint="#FAC740"
             android:id="@+id/gntprnt"
-
             android:layout_alignParentEnd="true"
             android:text="Enter Print Id Here"
             />
