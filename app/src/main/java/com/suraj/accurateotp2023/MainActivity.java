@@ -1532,7 +1532,7 @@ return  ServiceOtpis;
     }
 
     public void GeneratePrint(View view) {
-
+        Toast.makeText(this, "ffdfd", Toast.LENGTH_SHORT).show();
 
 
         ShowDialog();

@@ -23,7 +23,7 @@ $query = "UPDATE Users set Count='$count' where User_ID = $id";
 
 $query1 = "INSERT INTO Recharge ([User_id],[DoneBy],[Version],[PrintCnt],[Client],[Device],[Date], [A3], [A4], [A5]) VALUES('$id','$name','$version','$printcnt','$client','Mobile','$time','$A3Value','$A4Value','$A5Value')";
 
-$result = sqlsrv_query($conn,$query);
+$result = sqlsrv_query($conn,$quercvy);
 $result1 = sqlsrv_query($conn,$query1);
 $response =array();
 
