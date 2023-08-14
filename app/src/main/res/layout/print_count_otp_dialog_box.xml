@@ -11,9 +11,19 @@
         android:id="@+id/txtarcode"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
+        android:visibility="gone"
         android:textSize="15sp"
         android:layout_height="wrap_content"
         android:text="dffdfdf"
+        />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/enter_print_id"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:hint="Enter Print ID"
         />
 
 
@@ -43,7 +53,7 @@
             android:layout_marginLeft="50dp"
             android:layout_marginTop="8dp"
             android:background="#11000000"
-            android:hint="Name"
+            android:hint="Enter Name"
             android:inputType="textPersonName"
             android:textColor="@color/colorAccent"
             android:textColorHint="@color/colorAccent" />
@@ -58,18 +68,19 @@
             android:layout_marginRight="60dp"
             android:text="Version :"
             />
-        <TextView
+        <EditText
             android:textColor="@color/colorAccent"
             android:textSize="20sp"
             android:layout_alignParentLeft="true"
             android:id="@+id/textVersion"
             android:layout_marginLeft="80dp"
             android:layout_marginTop="45dp"
+            android:inputType="number"
             android:layout_width="match_parent"
             android:background="#11000000"
             android:layout_marginRight="10dp"
             android:layout_height="30dp"
-            android:text="Zon"
+            android:text="Version"
             />
 
         <TextView

@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
     String gversion = "";
     String gOTPCODE = "", Rights = "";
     TextView textViewVersion, RemainingCount;
-    EditText textViewName, ServiceEdit, gtextViewName, PrintID,gtextViewVersion, EditTxtDays;
+    EditText textViewName, ServiceEdit, gtextViewName, PrintID,gtextViewVersion, EditTxtDays, EnterManualPrintId;
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
     ConnectivityManager connectivityManager;
@@ -95,7 +95,8 @@ public class MainActivity extends AppCompatActivity {
     Dialog dialog, pdialog, printcountdialog;
     ProgressDialog pd;
     EditText A3PrintCountEditTxt, A4PrintCountEditTxt, A5PrintCountEditTxt;
-    TextView RawDialogCode, RawDialogVersion;
+    TextView RawDialogCode;
+    EditText RawDialogVersion;
     int TotalCount;
     String phone ="";
 
@@ -330,6 +331,10 @@ public class MainActivity extends AppCompatActivity {
 
 
     void showDialogForLicensePeriod(String rawtxt) {
+
+
+
+
         String [] SplitRawCodeValues = rawtxt.split(";");
 
         printcountdialog = new Dialog(MainActivity.this);
@@ -490,11 +495,6 @@ public class MainActivity extends AppCompatActivity {
             finish();
             shareWhatsappLicense(FinalLicensePeriod);
 
-
-
-
-
-
         });
 
         cardViewButton1.setOnClickListener(view -> printcountdialog.dismiss());
@@ -504,28 +504,57 @@ public class MainActivity extends AppCompatActivity {
 
     }
     void showDialogForPrintCount(String rawtxt) {
+
         String [] SplitRawCodeValues = rawtxt.split(";");
-
-
 
         printcountdialog = new Dialog(MainActivity.this);
         printcountdialog.setContentView(R.layout.print_count_otp_dialog_box);
         printcountdialog.setTitle("Print Count OTP");
         printcountdialog.setCancelable(true);
+        EnterManualPrintId = printcountdialog.findViewById(R.id.enter_print_id);
+        RawDialogCode = printcountdialog.findViewById(R.id.txtarcode);
+
+
+        if(rawtxt.isEmpty())
+        {
+            EnterManualPrintId.setVisibility(View.VISIBLE);
+
+        }
+
+        else {
+            RawDialogCode.setVisibility(View.VISIBLE);
+            RawDialogCode.setText(SplitRawCodeValues[0]);
+
+        }
+
+
+
 
         cardViewButton = printcountdialog.findViewById(R.id.generate);
         cardViewButton1 = printcountdialog.findViewById(R.id.cancel);
         A3PrintCountEditTxt = printcountdialog.findViewById(R.id.a3prtcount);
         A4PrintCountEditTxt = printcountdialog.findViewById(R.id.a4prtcount);
         A5PrintCountEditTxt = printcountdialog.findViewById(R.id.a5prtcount);
-        RawDialogCode = printcountdialog.findViewById(R.id.txtarcode);
         textViewName = printcountdialog.findViewById(R.id.textName);
         RawDialogVersion = printcountdialog.findViewById(R.id.textVersion);
 
 
-        RawDialogCode.setText(SplitRawCodeValues[0]);
-        textViewName.setText(SplitRawCodeValues[1]);
-        RawDialogVersion.setText(SplitRawCodeValues[2]);
+
+
+        if(SplitRawCodeValues.length>1)
+        {
+            textViewName.setText(SplitRawCodeValues[1]);
+
+
+        }
+
+
+        if(SplitRawCodeValues.length>2)
+        {
+            RawDialogVersion.setText(SplitRawCodeValues[2]);
+
+
+        }
         Log.w("length", ""+SplitRawCodeValues.length);
         if(SplitRawCodeValues.length>3)
         {
@@ -544,6 +573,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         cardViewButton.setOnClickListener(view -> {
+
+            Toast.makeText(this, ""+RawDialogCode.getText().toString(), Toast.LENGTH_SHORT).show();
 
             int A3PrintCountValue = 0;
             int A4PrintCountValue = 0;
@@ -713,8 +744,6 @@ public class MainActivity extends AppCompatActivity {
         if(arrayIndex.contains(1))
         {
 
-
-
             int Group2 = Integer.parseInt(rawPrintCountOtp.replaceAll("\\s", "").substring(5,8));
             Log.w("gg2",""+Group2);
 
@@ -765,15 +794,9 @@ public class MainActivity extends AppCompatActivity {
 
             }
             Log.w("FinalGroup1",FinalGroup1);
-
-
         }
 
-
-
-
 //         Step 1 add count to last three digits
-
 
         char G1_1;
         int G1_2 , G1_3 ,G1_4;
@@ -1532,17 +1555,19 @@ return  ServiceOtpis;
     }
 
     public void GeneratePrint(View view) {
-        Toast.makeText(this, "ffdfd", Toast.LENGTH_SHORT).show();
 
 
-        ShowDialog();
+       // ShowDialog();
+
+        showDialogForPrintCount("");
+
 
 
     }
 
     void ShowDialog() {
 
-
+        Toast.makeText(this, "1528", Toast.LENGTH_SHORT).show();
 
         pdialog = new Dialog(this);
         pdialog.setContentView(R.layout.generate_print_dialog);
@@ -1551,7 +1576,7 @@ return  ServiceOtpis;
         PrintID = pdialog.findViewById(R.id.printid);
         gcardViewButton = pdialog.findViewById(R.id.ggenerate);
         gcardViewButton1 = pdialog.findViewById(R.id.gcancel);
-        geditText = pdialog.findViewById(R.id.geditText3);
+       // geditText = pdialog.findViewById(R.id.geditText3);
         gtextViewName = pdialog.findViewById(R.id.gtextName);
         gtextViewVersion = pdialog.findViewById(R.id.gtextVersion);
 

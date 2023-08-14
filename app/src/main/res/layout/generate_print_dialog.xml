@@ -23,7 +23,7 @@
         />
     <EditText
         android:layout_marginTop="20dp"
-        android:id="@+id/geditText3"
+        android:id="@+id/A3"
         android:layout_width="250dp"
         android:layout_height="40dp"
         android:background="#11000000"
@@ -32,7 +32,37 @@
         android:textColor="@color/colorAccent"
         android:textColorHint="@color/colorAccent"
         android:layout_gravity="center"
-        android:hint="Enter Print Count"
+        android:hint="A3 Value"
+        android:inputType="number"
+        android:layout_marginBottom="20dp"
+        />
+    <EditText
+        android:layout_marginTop="20dp"
+        android:id="@+id/A4"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:background="#11000000"
+        android:ems="10"
+        android:maxLength="4"
+        android:textColor="@color/colorAccent"
+        android:textColorHint="@color/colorAccent"
+        android:layout_gravity="center"
+        android:hint="A4 Value"
+        android:inputType="number"
+        android:layout_marginBottom="20dp"
+        />
+    <EditText
+        android:layout_marginTop="20dp"
+        android:id="@+id/A5"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:background="#11000000"
+        android:ems="10"
+        android:maxLength="4"
+        android:textColor="@color/colorAccent"
+        android:textColorHint="@color/colorAccent"
+        android:layout_gravity="center"
+        android:hint="A5 Value"
         android:inputType="number"
         android:layout_marginBottom="20dp"
         />
@@ -88,7 +118,9 @@
             />
     </RelativeLayout>
 
-    <android.support.v7.widget.CardView
+
+
+    <androidx.cardview.widget.CardView
         android:layout_width="250dp"
         android:layout_height="50dp"
         app:cardBackgroundColor="@color/colorAccent"
@@ -111,9 +143,9 @@
                 android:textColor="#fff"
                 android:textSize="18sp" />
         </RelativeLayout>
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:layout_width="250dp"
         android:layout_height="50dp"
         app:cardBackgroundColor="@color/colorAccent"
@@ -136,6 +168,6 @@
                 android:textColor="#fff"
                 android:textSize="18sp" />
         </RelativeLayout>
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
 </LinearLayout>
