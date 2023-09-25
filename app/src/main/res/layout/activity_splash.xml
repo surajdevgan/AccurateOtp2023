@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:layout_height="match_parent"
     android:background="@drawable/splash"
-    tools:context=".Splash">
+    tools:context=".SplashScreenActivity">
     <ProgressBar
         android:layout_marginTop="370dp"
         android:id="@+id/progressbar"

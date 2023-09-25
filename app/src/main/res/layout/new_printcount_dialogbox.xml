@@ -72,7 +72,7 @@
             android:textColor="@color/colorAccent"
             android:textSize="20sp"
             android:layout_alignParentLeft="true"
-            android:id="@+id/textVersion"
+            android:id="@+id/EDTextVersion"
             android:layout_marginLeft="80dp"
             android:layout_marginTop="45dp"
             android:inputType="number"

@@ -1,4 +1,4 @@
-package com.suraj.accurateotp2023;
+package com.suraj.accurateotp2023.util;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

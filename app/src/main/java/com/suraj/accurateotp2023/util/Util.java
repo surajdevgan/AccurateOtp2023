@@ -1,10 +1,13 @@
-package com.suraj.accurateotp2023;
+package com.suraj.accurateotp2023.util;
 
 
 public class Util {
 
     public static final String updateAndInsert="http://accurate-001-site1.gtempurl.com/PHP/newUpdateDetaols.php";
     public static final String login1="http://accurate-001-site1.gtempurl.com/PHP/AccuLogin.php";
+
+    public static final String updateAndInsertForOldPrintCount="http://accurate-001-site1.gtempurl.com/PHP/oldUpdateDetaols.php";
+
     public static final String GetUserRights = "http://accurate-001-site1.gtempurl.com/PHP/GetUserRights.php";
 
 

@@ -21,6 +21,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.suraj.accurateotp2023.util.ConnectionCheck;
+import com.suraj.accurateotp2023.util.Util;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,7 +31,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class login extends AppCompatActivity {
+public class LoginScreenActivity extends AppCompatActivity {
 
     CardView cardView;
     EditText Phone;
@@ -64,10 +66,10 @@ public class login extends AppCompatActivity {
                 Phone.requestFocus();
                 return;
             }
-            if (ConnectionCheck.isConnected(connectivityManager,networkInfo,login.this)) {
+            if (ConnectionCheck.isConnected(connectivityManager,networkInfo, LoginScreenActivity.this)) {
                 loginUser();
             }else {
-                Toast.makeText(login.this, "Internet Connection Required", Toast.LENGTH_LONG).show();
+                Toast.makeText(LoginScreenActivity.this, "Internet Connection Required", Toast.LENGTH_LONG).show();
             }
 
         });
@@ -102,21 +104,21 @@ public class login extends AppCompatActivity {
                     editor.putInt(Util.id,id);
                     editor.putString(Util.Rights, Rights);
                     editor.apply();
-                    startActivity(new Intent(login.this,MainActivity.class));
+                    startActivity(new Intent(LoginScreenActivity.this,MainActivity.class));
                     finish();
                 }else{
                     pb.setVisibility(View.GONE);
-                    Toast.makeText(login.this, message, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginScreenActivity.this, message, Toast.LENGTH_SHORT).show();
                 }
             } catch (JSONException e) {
                 pb.setVisibility(View.GONE);
-                Toast.makeText(login.this,"Login Fail "+e, Toast.LENGTH_LONG).show();
+                Toast.makeText(LoginScreenActivity.this,"Login Fail "+e, Toast.LENGTH_LONG).show();
                 e.printStackTrace();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(login.this,"Login Fail" +error, Toast.LENGTH_LONG).show();
+                Toast.makeText(LoginScreenActivity.this,"Login Fail" +error, Toast.LENGTH_LONG).show();
                 pb.setVisibility(View.GONE);
 
             }

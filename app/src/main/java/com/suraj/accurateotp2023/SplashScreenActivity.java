@@ -22,6 +22,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.suraj.accurateotp2023.util.ConnectionCheck;
+import com.suraj.accurateotp2023.util.Util;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,7 +32,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Splash extends AppCompatActivity {
+public class SplashScreenActivity extends AppCompatActivity {
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
     RequestQueue requestQueue;
@@ -66,7 +68,7 @@ public class Splash extends AppCompatActivity {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        startActivity(new Intent(Splash.this,login.class));
+                        startActivity(new Intent(SplashScreenActivity.this, LoginScreenActivity.class));
                         finish();
                         pb.setVisibility(View.GONE);
                     }
@@ -110,7 +112,7 @@ public class Splash extends AppCompatActivity {
                             @Override
                             public void run() {
 
-                                startActivity(new Intent(Splash.this,MainActivity.class));
+                                startActivity(new Intent(SplashScreenActivity.this,MainActivity.class));
                                 finish();
                                 pb.setVisibility(View.GONE);
                             }
@@ -120,7 +122,7 @@ public class Splash extends AppCompatActivity {
                             @Override
                             public void run() {
 
-                                startActivity(new Intent(Splash.this,login.class));
+                                startActivity(new Intent(SplashScreenActivity.this, LoginScreenActivity.class));
                                 finish();
                                 pb.setVisibility(View.GONE);
                             }
