@@ -53,6 +53,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+
 
 public class MainActivity extends AppCompatActivity {
     private OldPrintCountDialogHelper printCountDialogHelper;
@@ -807,7 +810,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void showNoRightsMessage() {
-        Toast.makeText(this, "No Rights For this QR Code", Toast.LENGTH_LONG).show();
+showErrorDialog("This error usually occurs if the qr code is invalid\nTry to manual enter the vqlues.");
     }
 
     private void shareServiceOTP(String serviceOTP) {
@@ -1099,6 +1102,23 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         requestQueue.add(request);
+    }
+
+    void showErrorDialog(String errorMessage)
+    {
+        // Create and configure the AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle("Error!");
+        builder.setMessage(errorMessage);
+        builder.setPositiveButton("OK", (dialog, which) -> {
+            // Dismiss the dialog when the "OK" button is clicked
+            dialog.dismiss();
+        });
+
+        // Create and show the AlertDialog
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
     }
 
 }
